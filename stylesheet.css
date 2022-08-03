@@ -1,0 +1,150 @@
+body {
+    background-color: ghostwhite;
+}
+
+#Top{
+    color: rgba(45, 45, 45, 0.9);
+    background-color: white;
+    font-size: 1em;
+    margin-bottom: 20px;
+
+}
+
+h1 {
+    padding-top: 40px;
+    margin-bottom: 10px;
+}
+
+.thumbnail {
+    display: flex;
+}
+.thnmbnail_box {
+    margin-right: 30px;
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+h6 {
+    margin-top: 0px;
+    margin-bottom: 0;
+}
+
+.thumbnail_img{
+    height: 100px;
+    cursor: pointer;
+}
+
+#canvas {
+    color: white;
+    border: 1px solid white;
+    border-bottom-color: darkgray;
+    background-size: 1000px;
+    padding: 0;
+    position: absolute ;
+    margin: auto;
+    display: block;
+}
+
+#canvas_div {
+    height: 450px;
+    width: 820px;
+    /* height: canvas.heigth; */
+    margin: 0px;
+    cursor: crosshair;
+
+}
+
+
+#Finish_btn {
+    font-size: 1em;
+    background-color:darkgray;
+    border-radius: 30px;
+    border: 20px;
+    border-color: white;
+    color: white;
+    padding: 5px;
+    position: absolute;
+    top: 15px;
+    left: 900px;
+    cursor: pointer;
+
+    margin-bottom: 10px;
+}
+
+#Clear_btn {
+    font-size: 1em;
+    background-color: darkgray;
+    border-radius: 30px;
+    border: 20px;
+    border-color: white;
+    color: white;
+    padding: 5px;
+    margin-bottom: 10px;
+    margin-left: 40px;
+    position: absolute;
+    top: 15px;
+    left: 930px;
+    cursor: pointer;
+
+}
+
+#Result_Section {
+    margin-top: 30px;
+    position: relative;
+    /* top:-450px ; */
+    /* left: 900px; */
+}
+
+#mouse_div {
+    font-size: 0.4em;
+}
+
+/* .container {
+    display: flex;
+} */
+
+table {
+    border-collapse: collapse;
+    /* margin: 0 auto; */
+    padding: 0;
+    /* width: 650px; */
+    table-layout: fixed;
+    color: white;
+    position: absolute;
+    top: 50px;
+    left: 900px;
+}
+
+table tr {
+    background-color: darkgray;
+    padding: 1em;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+}
+
+table th, table td {
+    padding: 1em 1em 1em 1em;
+    border-right: 1px solid #fff;
+}
+
+table th {
+    font-size: .5em;
+}
+
+#input_reason{
+    background-color:antiquewhite;
+    border: 0;
+
+}
+
+#input_test{
+    background-color: antiquewhite ;
+    border: 0;
+
+}
+
+#download {
+    position: absolute;
+    top: 450px;
+    left: 780px;
+}
