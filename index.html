@@ -1,0 +1,62 @@
+<html>
+
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>教えて！あなたのお気に入りポイント</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="final.css">
+
+</head>
+
+
+<body>
+  <section id="Top">
+    <h1>気に入った箇所をクリックしてください</h1>
+    <p>View</p>
+    <div class="thumbnail">
+      <div class="thnmbnail_box">
+        <h6>front</h6>
+        <img class="thumbnail_img" id="front_img">
+      </div>
+      <div class="thnmbnail_box">
+        <h6>back</h6>
+        <img class="thumbnail_img" id="back_img">
+      </div>
+      <div class="thnmbnail_box">
+        <h6>inner</h6>
+        <img class="thumbnail_img" id="inner_img">
+      </div>
+    </div>
+  </section>
+
+  <section id="Result_Section" class="container">
+    <div id="mouse_div">現在のマウス座標</div>
+    <div id="canvas_div" class="item">
+      <canvas id="canvas"></canvas>
+    </div>
+
+    <div class="item">
+      <button id="Finish_btn">finish</button>
+      <button id="Clear_btn">clear</button>
+
+      <table id="Result_Table">
+        <tr id="Result_Table_Value">
+          <th>No.</th>
+          <th>X座標</th>
+          <th>Y座標</th>
+          <th>どんなところが？(任意)</th>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+
+  <button onclick="location.href='nishi_top.html'">test</button>
+  <input type="text" id="input_test">
+
+
+  <script type="text/javascript" src="final_script01.js"></script>
+</body>
+
+</html>
