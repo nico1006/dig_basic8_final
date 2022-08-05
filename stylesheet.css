@@ -148,3 +148,12 @@ table th {
     top: 450px;
     left: 780px;
 }
+#next {
+    position: absolute;
+    top: 480px;
+    left: 780px;
+}
+
+hr {
+    margin-top: 100px;
+}
