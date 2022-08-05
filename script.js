@@ -9,7 +9,7 @@ let mouse_target = "";
 let counter = 1;
 let data_csv = "";
 
-
+let top_info = true;
 
 // const link_test_id01 = document.getElementById("link_test") ;
 // console.log(link_test_id01) ;
@@ -19,6 +19,50 @@ let data_csv = "";
 // link_test_id.innerHTML = '<a href="nishi_top.html">link_test02</a>' ;
 // console.log(link_test_id) ;
 // link_test_id.innerHTML ="<a href='nishi_top.html'>new test</a>"
+
+if (top_info === true) {
+
+    // 文字スペースを表示
+    const top_canvas_id = document.getElementById('top_canvas');
+    const height = 1200 ;
+    const width = 1200 ;
+    top_canvas_id.setAttribute("width", height);
+    top_canvas_id.setAttribute("height", width);
+
+    const top_ctx = top_canvas_id.getContext('2d');
+    // top_ctx.fillStyle = 'AliceBlue'; // 図形の色
+    top_ctx.fillStyle = "rgba(" + [224, 255, 255, 0.75] + ")"; // 図形の色
+    top_ctx.fillRect(10, 10, height, width);
+
+    top_ctx.fillStyle = 'Goldenrod';  // 文字の色
+    top_ctx.font = '50px fantasy';
+    top_ctx.fillText("おめでとうございます！！", 50, 100);
+    top_ctx.fillText("無事、西村さんのAlphardが整いました！！", 50, 160);
+
+    const top_ctx2 = top_canvas_id.getContext('2d');
+    top_ctx2.fillStyle = 'black';  // 文字の色
+    top_ctx.font = '30px fantasy';
+
+    top_ctx2.fillText("続いては、Alphardのカッコよいポイントを教えてください。", 70, 300);
+    top_ctx2.fillText("写真は　front/back/inner　があります。", 70, 350);
+    top_ctx2.fillText("チェックが完了したら　　　　　　ボタンを押してください。", 70, 400);
+
+    top_ctx2.fillText("性格診断は本チェックが最後です！", 70, 700);
+
+    const top_ctx3 = top_canvas_id.getContext('2d');
+    top_ctx3.fillStyle = "darkgray"; // 図形の色
+    top_ctx3.fillRect(400, 370, 120, 35);
+    top_ctx3.fillStyle = 'white';  // 文字の色
+    top_ctx3.font = '30px Gosic';
+    top_ctx3.fillText("finish", 420, 400);
+
+
+    document.body.addEventListener("mousedown", function (event) {
+        top_canvas_id.remove() ;
+    }) ;
+
+}
+
 
 
 //////////////////////////////////////////////////////////////////////////////
@@ -41,9 +85,9 @@ let inner = "";
 let canvas_img = new Image();
 
 if (img_choice === "kazmax") {
-    front = 'img/kazmax.jpg';
-    back = "img/kazmax.jpg";
-    inner = "img/kazmax.jpg";
+    front = 'img/kazmax_front.jpg';
+    back = "img/kazmax_back.jpg";
+    inner = "img/kazmax_inner.jpg";
 } else if (img_choice === "landcruier") {
     front = 'img/landcruiser_front.jpg';
     back = "img/landcruiser_back.jpg";
@@ -105,6 +149,9 @@ window.onload = function () {
         //座標を取得する
         let mX = event.offsetX;  //X座標
         let mY = event.offsetY;  //Y座標
+
+        // top_info = false ;
+        // top_canvas_id.remove() ;
 
         if (mouse_target === "canvas") {
             // document.getElementById("static_x").value = mX;
@@ -196,7 +243,7 @@ finish_btn.addEventListener("click", () => {
         download_btn.innerHTML = "download";
 
         next_btn.id = "next";
-        next_btn.innerHTML = "<a href='https://makototanabe.github.io/'>あなたの結果はこちら</a>";
+        next_btn.innerHTML = "<a href='https://makototanabe.github.io/'>あなたの性格診断結果</a>";
         // console.log(download_btn);
         // top.appendChild(test) ;
         Result_Section_ID.appendChild(download_btn);
