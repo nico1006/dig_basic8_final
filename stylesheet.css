@@ -193,3 +193,11 @@ hr {
 .container {
     display: flex;
 }
+
+.on_list {
+    background-color: ghostwhite;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1em;
+    text-underline-position:below ;
+}

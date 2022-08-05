@@ -23,8 +23,8 @@ if (top_info === true) {
 
     // 文字スペースを表示
     const top_canvas_id = document.getElementById('top_canvas');
-    const height = 1200 ;
-    const width = 1200 ;
+    const height = 1200;
+    const width = 1200;
     top_canvas_id.setAttribute("width", height);
     top_canvas_id.setAttribute("height", width);
 
@@ -57,8 +57,8 @@ if (top_info === true) {
 
 
     document.body.addEventListener("mousedown", function (event) {
-        top_canvas_id.remove() ;
-    }) ;
+        top_canvas_id.remove();
+    });
 
 }
 
@@ -73,7 +73,7 @@ canvas.setAttribute("height", "420");
 
 // 前ページなどから取得したimgNo.
 const img_arr = ["kazmax", "landcruiser", "alphard"]
-const img_choice = img_arr[0];
+const img_choice = img_arr[2];
 let choice_view = "front";
 let front = "";
 let back = "";
@@ -96,6 +96,74 @@ if (img_choice === "kazmax") {
     back = "img/alphard_back.jpg";
     inner = "img/alphard_inner.jpg";
 }
+
+
+document.getElementById("kazmax").onclick = function () {
+    front = 'img/kazmax_front.jpg';
+    back = "img/kazmax_back.jpg";
+    inner = "img/kazmax_inner.jpg";
+
+    // htmlに表示する画像を設定
+    canvas_img.src = front;
+    document.getElementById("front_img").src = front;
+    document.getElementById("back_img").src = back;
+    document.getElementById("inner_img").src = inner;
+
+
+    // 画像読み込み終了してから描画
+    canvas_img.onload = function () {
+        // canvas様のインスタンス作成
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(canvas_img, 0, 0, canvas.width, canvas.height);
+        ctx.translate = (850, 420);
+        ctx.translate = (1000, 2500);
+    }
+}
+
+document.getElementById("landcruiser").onclick = function () {
+    front = 'img/landcruiser_front.jpg';
+    back = "img/landcruiser_back.jpg";
+    inner = "img/landcruiser_inner.jpg";
+
+    // htmlに表示する画像を設定
+    canvas_img.src = front;
+    document.getElementById("front_img").src = front;
+    document.getElementById("back_img").src = back;
+    document.getElementById("inner_img").src = inner;
+
+    // 画像読み込み終了してから描画
+    canvas_img.onload = function () {
+        // canvas様のインスタンス作成
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(canvas_img, 0, 0, canvas.width, canvas.height);
+        ctx.translate = (850, 420);
+        ctx.translate = (1000, 2500);
+    }
+}
+
+document.getElementById("alphard").onclick = function () {
+    front = 'img/alphard_front.jpg';
+    back = "img/alphard_back.jpg";
+    inner = "img/alphard_inner.jpg";
+
+    // htmlに表示する画像を設定
+    canvas_img.src = front;
+    document.getElementById("front_img").src = front;
+    document.getElementById("back_img").src = back;
+    document.getElementById("inner_img").src = inner;
+
+    // 画像読み込み終了してから描画
+    canvas_img.onload = function () {
+        // canvas様のインスタンス作成
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(canvas_img, 0, 0, canvas.width, canvas.height);
+        ctx.translate = (850, 420);
+        ctx.translate = (1000, 2500);
+    }
+}
+
+
+
 
 // htmlに表示する画像を設定
 canvas_img.src = front;
