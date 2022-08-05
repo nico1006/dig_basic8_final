@@ -2,23 +2,22 @@
 // 1行目に記載している 'use strict' は削除しないでください
 
 console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-console.log("hello final_script.js!");
+console.log("hello nishimura's script.js!");
 
 // グローバル変数
 let mouse_target = "";
 let counter = 1;
 let data_csv = "";
 
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////
+// くにしー.htmlから遷移してきた場合に表示させるcanvas
+//////////////////////////////////////////////////////////////////////////////
 let top_info = true;
-
-// const link_test_id01 = document.getElementById("link_test") ;
-// console.log(link_test_id01) ;
-
-// const link_test_id = document.getElementById("link_test02") ;
-// link_test_id.href = "nishi_top.html" ;
-// link_test_id.innerHTML = '<a href="nishi_top.html">link_test02</a>' ;
-// console.log(link_test_id) ;
-// link_test_id.innerHTML ="<a href='nishi_top.html'>new test</a>"
+// let top_info = false;
 
 if (top_info === true) {
 
@@ -47,7 +46,7 @@ if (top_info === true) {
     top_ctx2.fillText("写真は　front/back/inner　があります。", 70, 350);
     top_ctx2.fillText("チェックが完了したら　　　　　　ボタンを押してください。", 70, 400);
 
-    top_ctx2.fillText("性格診断は本チェックが最後です！", 70, 700);
+    top_ctx2.fillText("~~~性格診断は本チェックが最後です~~~", 70, 700);
 
     const top_ctx3 = top_canvas_id.getContext('2d');
     top_ctx3.fillStyle = "darkgray"; // 図形の色
@@ -74,7 +73,7 @@ canvas.setAttribute("height", "420");
 
 // 前ページなどから取得したimgNo.
 const img_arr = ["kazmax", "landcruiser", "alphard"]
-const img_choice = img_arr[2];
+const img_choice = img_arr[0];
 let choice_view = "front";
 let front = "";
 let back = "";
