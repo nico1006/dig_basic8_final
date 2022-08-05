@@ -7,8 +7,18 @@ console.log("hello final_script.js!");
 // グローバル変数
 let mouse_target = "";
 let counter = 1;
-// let result_ = {};
+let data_csv = "";
 
+
+
+// const link_test_id01 = document.getElementById("link_test") ;
+// console.log(link_test_id01) ;
+
+// const link_test_id = document.getElementById("link_test02") ;
+// link_test_id.href = "nishi_top.html" ;
+// link_test_id.innerHTML = '<a href="nishi_top.html">link_test02</a>' ;
+// console.log(link_test_id) ;
+// link_test_id.innerHTML ="<a href='nishi_top.html'>new test</a>"
 
 
 //////////////////////////////////////////////////////////////////////////////
@@ -17,50 +27,49 @@ let counter = 1;
 const canvas = document.getElementById('canvas');
 canvas.setAttribute("width", "850");
 canvas.setAttribute("height", "420");
-// canvas.style.top = 200 ;
-// canvas.translate = (100, 250) ;
-
-// canvas.style.width = "2000px" ;
 
 // 前ページなどから取得したimgNo.
-const img_choice = 1 ;
-let front = "" ;
-let back = "" ;
-let inner = "" ;
+const img_arr = ["kazmax", "landcruiser", "alphard"]
+const img_choice = img_arr[0];
+let choice_view = "front";
+let front = "";
+let back = "";
+let inner = "";
 
-let c1 = canvas.getContext('2d');
 
 // Image オブジェクトを生成
 let canvas_img = new Image();
 
-if (img_choice === 0) {
+if (img_choice === "kazmax") {
     front = 'img/kazmax.jpg';
-    back  = "img/kazmax.jpg" ;
-    inner = "img/kazmax.jpg" ;
-    canvas_img.src = 'img/kazmax.jpg';
-} else if (img_choice === 1) {
+    back = "img/kazmax.jpg";
+    inner = "img/kazmax.jpg";
+} else if (img_choice === "landcruier") {
     front = 'img/landcruiser_front.jpg';
-    back  = "img/landcruiser_back.jpg" ;
-    inner = "img/landcruiser_inner.jpg" ;
-} else if (img_choice === 2) {
+    back = "img/landcruiser_back.jpg";
+    inner = "img/landcruiser_inner.jpg";
+} else if (img_choice === "alphard") {
     front = 'img/alphard_front.jpg';
-    back  = "img/alphard_back.jpg" ;
-    inner = "img/alphard_inner.jpg" ;
+    back = "img/alphard_back.jpg";
+    inner = "img/alphard_inner.jpg";
 }
 
-canvas_img.src = front ;
-document.getElementById("front_img").src = front ;
-document.getElementById("back_img").src = back ;
-document.getElementById("inner_img").src = inner ;
+// htmlに表示する画像を設定
+canvas_img.src = front;
+document.getElementById("front_img").src = front;
+document.getElementById("back_img").src = back;
+document.getElementById("inner_img").src = inner;
 
-
+// console.log("---------1-----------");
 
 
 // 画像読み込み終了してから描画
 canvas_img.onload = function () {
-    c1.drawImage(canvas_img, 0, 0, canvas.width, canvas.height);
-    c1.translate = (850, 420);
-    // c1.translate = (1000, 2500);
+    // canvas様のインスタンス作成
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(canvas_img, 0, 0, canvas.width, canvas.height);
+    ctx.translate = (850, 420);
+    ctx.translate = (1000, 2500);
 }
 
 
@@ -68,12 +77,12 @@ canvas_img.onload = function () {
 // ページの読込みが完了したら動作を実行
 //////////////////////////////////////////////////////////////////////////////
 window.onload = function () {
-    // マウス移動時のイベントをBODYタグに登録する
-    document.body.addEventListener("mousemove", function (e) {
 
+    // マウス移動時のイベントをBODYタグに登録する
+    document.body.addEventListener("mousemove", function (event) {
         //座標を取得する
-        let mX = e.offsetX;  //X座標
-        let mY = e.offsetY;  //Y座標
+        let mX = event.offsetX;  //X座標
+        let mY = event.offsetY;  //Y座標
         // 出力先のidを取得
         const mouse = document.getElementById("mouse_div");
         if (mouse_target === "canvas") {
@@ -85,57 +94,67 @@ window.onload = function () {
     });
 
 
-    // マウスの位置を取得
+    // マウスの位置を取得し、mouse_targetにフラグとして保持
     document.body.addEventListener("mouseover", function (event) {
         mouse_target = event.target["id"];
-        // document.getElementById("mouse_elme").value = event.target["id"];
-        //event.targetの部分がマウスオーバーされている要素
     })
 
+
     // マウスクリックされた場合
-    document.body.addEventListener("mousedown", function (e) {
+    document.body.addEventListener("mousedown", function (event) {
         //座標を取得する
-        let mX = e.offsetX;  //X座標
-        let mY = e.offsetY;  //Y座標
+        let mX = event.offsetX;  //X座標
+        let mY = event.offsetY;  //Y座標
 
         if (mouse_target === "canvas") {
             // document.getElementById("static_x").value = mX;
             // document.getElementById("static_y").value = mY;
 
-
-            // 色を変えたいけど変わらない…
-            c1.strokeStyle = "bule";
-            c1.fillStyele = "red";
+            // canvas様のインスタンス作成
+            const ctx = canvas.getContext('2d');
+            // const circle1 = canvas.getContext('2d');
+            // const circle2 = canvas.getContext('2d');
 
             // pinを作成
-            c1.beginPath();
+            ctx.fillStyle = "red";
             // 下側の三角形
-            c1.moveTo(mX, mY);
-            c1.lineTo(mX + 9, mY - 13);
-            c1.lineTo(mX - 9, mY - 13);
-            c1.fill();
+            ctx.beginPath();
+            ctx.moveTo(mX, mY);
+            ctx.lineTo(mX + 9, mY - 13);
+            ctx.lineTo(mX - 9, mY - 13);
+            // ctx.closePath();
+            ctx.fill();
+
             // 上側の円弧
-            c1.arc(mX, mY - 13, 9, 180 * Math.PI / 180, 0 * Math.PI, false);
-            c1.fill();
+            ctx.arc(mX, mY - 13, 9, 180 * Math.PI / 180, 0 * Math.PI, true);
+            // ctx.closePath() ;
+            ctx.fill();
+
+            // 上側の円弧
+            // circle2.fillStyle = "white";
+            // circle2.arc(mX + 50, mY - 13, 5, 0, 360 , true);
+            // circle2.closePath();
+            // circle2.fill();
 
             const firstViewElement = document.getElementById('Result_Table');
-            firstViewElement.insertAdjacentHTML('beforeend', `<th>${counter}</th><th>${mX}</th><th>${mY}</th><th><input type='text' id="input_reason"></th>`);
+            firstViewElement.insertAdjacentHTML('beforeend', `<th>${counter}</th><th>${mX}</th><th>${mY}</th><th>${choice_view}</th><th><input type='text' id="input_reason"></th>`);
+            console.log(choice_view);
 
             counter++;
 
         } else if (mouse_target === "back_img") {
             canvas_img.src = back;
+            choice_view = "back";
         } else if (mouse_target === "front_img") {
             canvas_img.src = front;
+            choice_view = "front";
         } else if (mouse_target === "inner_img") {
             canvas_img.src = inner;
+            choice_view = "inner";
         }
 
     })
-
-
 }
-
 
 //////////////////////////////////////////////////////////////////////////////
 // Finishボタンクリック時の挙動
@@ -147,14 +166,13 @@ finish_btn.addEventListener("click", () => {
     if (conf === true) {
 
         const table = document.getElementById("Result_Table");
-        let data_csv = "";
         // const cells = Result.querySelectorAll("td") ;
         // cells.forEach( (cell) => console.log(cell.innerText)) ;
 
         // 結果の取得
         for (let row of table.rows) {
             for (let column = 0; column < row.cells.length; column++) {
-                console.log(row.cells[column].innerHTML);
+                // console.log(row.cells[column].innerHTML);
                 data_csv += row.cells[column].innerText;       // data_csvに格納
                 if (column === row.cells.length - 1) {
                     data_csv += "\n";
@@ -167,29 +185,35 @@ finish_btn.addEventListener("click", () => {
 
         // Downloadボタンを作りたい
 
-        const top = document.getElementById("Top");
-        const ttt = document.getElementById("Result_Section");
+        // const top = document.getElementById("Top");
+        const Result_Section_ID = document.getElementById("Result_Section");
 
-        let btn = document.createElement("button");
-        let test = document.createElement("p");
-        test.innerHTML = "test";
-        btn.id = "download";
-        btn.innerHTML = "download";
-        console.log(btn);
+        let download_btn = document.createElement("button");
+        let next_btn = document.createElement("button");
+        // let test = document.createElement("p");
+        // test.innerHTML = "test";
+        download_btn.id = "download";
+        download_btn.innerHTML = "download";
+
+        next_btn.id = "next";
+        next_btn.innerHTML = "<a href='https://makototanabe.github.io/'>あなたの結果はこちら</a>";
+        // console.log(download_btn);
         // top.appendChild(test) ;
-        ttt.appendChild(btn);
+        Result_Section_ID.appendChild(download_btn);
+        Result_Section_ID.appendChild(next_btn);
 
+        // 画像を初期化
+        // canvas様のインスタンス作成
+        const ctx = canvas.getContext('2d');
 
-
-
-        c1.clearRect(0, 0, canvas.width, canvas.height);
-        c1.drawImage(canvas_img, 0, 0, canvas.width, canvas.height);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(canvas_img, 0, 0, canvas.width, canvas.height);
         const DelViewElement = document.getElementById('Result_Table');
         DelViewElement.remove();
 
         const CretViewElement = document.getElementById('Result_Section');
 
-        CretViewElement.insertAdjacentHTML('beforeend', "<table id='Result_Table'><tr><th>No.</th><th>X座標</th><th>Y座標</th><th>どんなところが？(任意)</th></tr></table>")
+        CretViewElement.insertAdjacentHTML('beforeend', "<table id='Result_Table'><tr><th>No.</th><th>X座標</th><th>Y座標</th><th>view</th><th>どんなところが？(任意)</th></tr></table>")
         counter = 1;
         alert("選択結果が送信されました！！\nご協力ありがとうございました！！");
 
@@ -202,14 +226,28 @@ finish_btn.addEventListener("click", () => {
 //////////////////////////////////////////////////////////////////////////////
 const clear_btn = document.querySelector("#Clear_btn")
 clear_btn.addEventListener("click", () => {
-    c1.clearRect(0, 0, canvas.width, canvas.height);
-    c1.drawImage(canvas_img, 0, 0, canvas.width, canvas.height);
+
+    // canvas様のインスタンス作成
+    const ctx = canvas.getContext('2d');
+
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(canvas_img, 0, 0, canvas.width, canvas.height);
     const DelViewElement = document.getElementById('Result_Table');
     DelViewElement.remove();
 
     const CretViewElement = document.getElementById('Result_Section');
 
-    CretViewElement.insertAdjacentHTML('beforeend', "<table id='Result_Table'><tr><th>No.</th><th>X座標</th><th>Y座標</th><th>どんなところが？(任意)</th></tr></table>")
+    CretViewElement.insertAdjacentHTML('beforeend', "<table id='Result_Table'><tr><th>No.</th><th>X座標</th><th>Y座標</th><th>view</th><th>どんなところが？(任意)</th></tr></table>")
     counter = 1;
 });
 
+
+//////////////////////////////////////////////////////////////////////////////
+
+console.log(data_csv);
+
+// const page_test_id = document.getElementById("page_test");
+// page_test_id.innerText = data_csv ;
+
+// console.log("---------end-----------") ;
