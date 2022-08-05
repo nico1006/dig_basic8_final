@@ -30,7 +30,7 @@ canvas.setAttribute("height", "420");
 
 // 前ページなどから取得したimgNo.
 const img_arr = ["kazmax", "landcruiser", "alphard"]
-const img_choice = img_arr[0];
+const img_choice = img_arr[2];
 let choice_view = "front";
 let front = "";
 let back = "";
