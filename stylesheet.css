@@ -44,6 +44,8 @@ h6 {
     position: absolute;
     margin: auto;
     display: block;
+    top: 15px;
+    left: 15px;
 }
 
 #canvas_div {
@@ -182,4 +184,12 @@ table th {
 
 hr {
     margin-top: 100px;
+}
+
+.list {
+    list-style-type: none;
+}
+
+.container {
+    display: flex;
 }
