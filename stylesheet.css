@@ -1,5 +1,6 @@
 body {
     background-color: ghostwhite;
+    font:Verdana ;
 }
 
 #Top {
@@ -59,7 +60,8 @@ h6 {
 
 #top_canvas {
     position: absolute;
-    top: 20;
+    top: 0;
+    left: 0;
 
 }
 

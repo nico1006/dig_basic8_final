@@ -31,18 +31,18 @@ if (top_info === true) {
     const top_ctx = top_canvas_id.getContext('2d');
     // top_ctx.fillStyle = 'AliceBlue'; // 図形の色
     top_ctx.fillStyle = "rgba(" + [224, 255, 255, 0.75] + ")"; // 図形の色
-    top_ctx.fillRect(10, 10, height, width);
+    top_ctx.fillRect(0, 0, height, width);
 
     top_ctx.fillStyle = 'Goldenrod';  // 文字の色
-    top_ctx.font = '50px fantasy';
-    top_ctx.fillText("おめでとうございます！！", 50, 100);
-    top_ctx.fillText("無事、西村さんのAlphardが整いました！！", 50, 160);
+    top_ctx.font = '50px Verdana';
+    top_ctx.fillText("ありがとうございます！！", 50, 100);
+    top_ctx.fillText("おかげ様で、西村のAlphardが整いました！！", 50, 160);
 
     const top_ctx2 = top_canvas_id.getContext('2d');
     top_ctx2.fillStyle = 'black';  // 文字の色
-    top_ctx.font = '30px fantasy';
+    top_ctx.font = '30px Verdana';
 
-    top_ctx2.fillText("続いては、Alphardのカッコよいポイントを教えてください。", 70, 300);
+    top_ctx2.fillText("続いては、Alphardのカッコイイポイントを教えてください。", 70, 300);
     top_ctx2.fillText("写真は　front/back/inner　があります。", 70, 350);
     top_ctx2.fillText("チェックが完了したら　　　　　　ボタンを押してください。", 70, 400);
 
@@ -71,31 +71,32 @@ const main_canvas = document.getElementById('main_canvas');
 main_canvas.setAttribute("width", "850");
 main_canvas.setAttribute("height", "420");
 
-// 前ページなどから取得したimgNo.
+// 初期画像の設定
 const img_arr = ["kazmax", "landcruiser", "alphard"]
-const img_choice = img_arr[2];
+let img_choice = img_arr[2];
 let choice_view = "front";
-let front = "";
-let back = "";
-let inner = "";
+let front = "img/alphard_front.jpg";
+let back = "img/alphard_back.jpg";
+let inner = "img/alphard_inner.jpg";
+console.log(`---${img_choice}---`);
 
 
 // Image オブジェクトを生成
 let canvas_img = new Image();
 
-if (img_choice === "kazmax") {
-    front = 'img/kazmax_front.jpg';
-    back = "img/kazmax_back.jpg";
-    inner = "img/kazmax_inner.jpg";
-} else if (img_choice === "landcruier") {
-    front = 'img/landcruiser_front.jpg';
-    back = "img/landcruiser_back.jpg";
-    inner = "img/landcruiser_inner.jpg";
-} else if (img_choice === "alphard") {
-    front = 'img/alphard_front.jpg';
-    back = "img/alphard_back.jpg";
-    inner = "img/alphard_inner.jpg";
-}
+// if (img_choice === "kazmax") {
+//     front = 'img/kazmax_front.jpg';
+//     back = "img/kazmax_back.jpg";
+//     inner = "img/kazmax_inner.jpg";
+// } else if (img_choice === "landcruier") {
+//     front = 'img/landcruiser_front.jpg';
+//     back = "img/landcruiser_back.jpg";
+//     inner = "img/landcruiser_inner.jpg";
+// } else if (img_choice === "alphard") {
+//     front = 'img/alphard_front.jpg';
+//     back = "img/alphard_back.jpg";
+//     inner = "img/alphard_inner.jpg";
+// }
 
 
 document.getElementById("kazmax").onclick = function () {
@@ -103,7 +104,11 @@ document.getElementById("kazmax").onclick = function () {
     back = "img/kazmax_back.jpg";
     inner = "img/kazmax_inner.jpg";
 
-    img_drowing() ;
+    img_drowing();
+    Clear_Window();
+    img_choice = img_arr[0];
+    console.log(`---${img_choice}---`);
+
 }
 
 document.getElementById("landcruiser").onclick = function () {
@@ -111,7 +116,11 @@ document.getElementById("landcruiser").onclick = function () {
     back = "img/landcruiser_back.jpg";
     inner = "img/landcruiser_inner.jpg";
 
-    img_drowing() ;
+    img_drowing();
+    Clear_Window();
+    img_choice = img_arr[1];
+    console.log(`---${img_choice}---`);
+
 }
 
 document.getElementById("alphard").onclick = function () {
@@ -119,10 +128,16 @@ document.getElementById("alphard").onclick = function () {
     back = "img/alphard_back.jpg";
     inner = "img/alphard_inner.jpg";
 
-    img_drowing() ;
+    img_drowing();
+    Clear_Window();
+    img_choice = img_arr[2];
+    console.log(`---${img_choice}---`);
 }
 
 
+//////////////////////////////////////////////////////////////////////////////
+// 画像を読み込む関数
+//////////////////////////////////////////////////////////////////////////////
 function img_drowing() {
 
     // htmlに表示する画像を設定
@@ -139,19 +154,16 @@ function img_drowing() {
         const ctx = main_canvas.getContext('2d');
         ctx.drawImage(canvas_img, 0, 0, main_canvas.width, main_canvas.height);
         ctx.translate = (850, 420);
-        // ctx.translate = (1000, 2500);
-        console.log("-----2-------");
+        // console.log("-----2-------");
 
     }
 }
-img_drowing() ;
+img_drowing();
 
 //////////////////////////////////////////////////////////////////////////////
 // ページの読込みが完了したら動作を実行
 //////////////////////////////////////////////////////////////////////////////
 window.onload = function () {
-    
-    console.log("-----on-------");
 
     // マウス移動時のイベントをBODYタグに登録する
     document.body.addEventListener("mousemove", function (event) {
@@ -173,7 +185,7 @@ window.onload = function () {
     // マウスの位置を取得し、mouse_targetにフラグとして保持
     document.body.addEventListener("mouseover", function (event) {
         mouse_target = event.target["id"];
-        console.log(mouse_target);
+        // console.log(mouse_target);
     })
 
 
@@ -182,58 +194,41 @@ window.onload = function () {
         //座標を取得する
         let mX = event.offsetX;  //X座標
         let mY = event.offsetY;  //Y座標
-        console.log("-----click-------");
+        // console.log("-----click-------");
 
         if (mouse_target === "main_canvas") {
 
-            // let pin_img = new Image();
-            // pin_img.src = 'img/pin.png';
-            // // // pin_img.onload(){
-            // const canvas1 = document.getElementById('main_canvas');
-
-            // const ctx_pin = canvas1.getContext('2d');
-            // ctx_pin.drawImage(pin_img, 0, 0, 100, 100,10,10,50,50);
-            // ctx_pin.drawImage(pin_img, 0, 0, 380, 214,10,10,50,50);
-            // ctx_pin.drawImage(pin_img, 0, 0, 300, 300,mX,mY,300,300);
-            // console.log("-----1-------");
-            // // }
-
-
-
-            // canvas様のインスタンス作成
-            const ctx = main_canvas.getContext('2d');
-            // const circle1 = canvas.getContext('2d');
-            const circle2 = main_canvas.getContext('2d');
+            // pinを表示
+            ////////////////////////////////////////////////
+            // canvas用のインスタンス作成
+            const ctx_red = main_canvas.getContext('2d');
+            const ctx_white = main_canvas.getContext('2d');
 
             // pinを作成
-            ctx.fillStyle = "red";
+            ctx_red.fillStyle = "red";
             // 下側の三角形
-            ctx.beginPath();
-            ctx.moveTo(mX, mY);
-            ctx.lineTo(mX + 9, mY - 13);
-            ctx.lineTo(mX - 9, mY - 13);
-            ctx.closePath();
-            ctx.fill();
-
+            ctx_red.beginPath();
+            ctx_red.moveTo(mX, mY);
+            ctx_red.lineTo(mX + 9, mY - 13);
+            ctx_red.lineTo(mX - 9, mY - 13);
+            ctx_red.fill();
             // 上側の円弧
-            ctx.arc(mX, mY - 13, 9, 180 * Math.PI / 180, 0 * Math.PI, false);
-            // ctx.arc(mX, mY - 13, 5, 180 * Math.PI / 180, 0 * Math.PI, true);
-            // ctx.closePath() ;
-            ctx.fill();
+            ctx_red.arc(mX, mY - 13, 9, 180 * Math.PI / 180, 0 * Math.PI, false);
+            // ctx_red.closePath();
+            ctx_red.fill();
+            // 白抜きの円
+            ctx_white.fillStyle = "white";
+            ctx_white.beginPath();
+            ctx_white.arc(mX, mY - 14, 5, 0, 360, false);
+            ctx_white.fill();
+            ctx_white.fillStyle = 'black';
+            ctx_white.font = '0.7em Impact';
+            ctx_white.fillText(counter, mX - 4, mY - 9);
 
-            // 上側の円弧
-            circle2.fillStyle = "white";
-            circle2.beginPath() ;
-            circle2.arc(mX , mY - 14, 5, 0, 360 , false);
-            // circle2.closePath();
-            circle2.fill();
-            circle2.fillStyle = 'black';  // 文字の色
-            circle2.font = '0.5em gosic';        
-            circle2.fillText(counter,mX-3 , mY - 10) ;
-
+            // tableに情報を格納
             const firstViewElement = document.getElementById('Result_Table');
-            firstViewElement.insertAdjacentHTML('beforeend', `<th>${counter}</th><th>${mX}</th><th>${mY}</th><th>${choice_view}</th><th><input type='text' id="input_reason"></th>`);
-            console.log(choice_view);
+            firstViewElement.insertAdjacentHTML('beforeend', `<th>${counter}</th><th>${mX}</th><th>${mY}</th><th>${choice_view}</th><th><input type='text' id="input_reason${counter}"></th>`);
+            console.log("--click:", choice_view);
 
             counter++;
 
@@ -265,51 +260,41 @@ finish_btn.addEventListener("click", () => {
         // cells.forEach( (cell) => console.log(cell.innerText)) ;
 
         // 結果の取得
+        let id_num = 0 ;
         for (let row of table.rows) {
             for (let column = 0; column < row.cells.length; column++) {
-                // console.log(row.cells[column].innerHTML);
                 data_csv += row.cells[column].innerText;       // data_csvに格納
                 if (column === row.cells.length - 1) {
                     data_csv += "\n";
-                } else {
+                } else if (column === row.cells.length-2 && id_num !== 0){
+                    let table_input_id = document.getElementById(`input_reason${id_num}`)
+                    data_csv += "," + table_input_id.value ;
+                } else if(column === row.cells.length-3 && id_num !== 0){
+                    data_csv += `,${img_choice}-`;
+                }else {
                     data_csv += ",";
                 }
             }
+            id_num++ ;
         }
         console.log(data_csv);
+        data_csv = [];      // data_csvの初期化
 
-        // Downloadボタンを作りたい
 
-        // const top = document.getElementById("Top");
+        // downloarボタン、性格診断結果ページボタンを作成
         const Result_Section_ID = document.getElementById("Result_Section");
 
-        let download_btn = document.createElement("button");
-        let next_btn = document.createElement("button");
-        // let test = document.createElement("p");
-        // test.innerHTML = "test";
-        download_btn.id = "download";
-        download_btn.innerHTML = "download";
+        // let download_btn = document.createElement("button");
+        // download_btn.id = "download";
+        // download_btn.innerHTML = "download";
+        // Result_Section_ID.appendChild(download_btn);
 
+        let next_btn = document.createElement("button");
         next_btn.id = "next";
         next_btn.innerHTML = "<a href='https://makototanabe.github.io/'>あなたの性格診断結果</a>";
-        // console.log(download_btn);
-        // top.appendChild(test) ;
-        Result_Section_ID.appendChild(download_btn);
         Result_Section_ID.appendChild(next_btn);
 
-        // 画像を初期化
-        // canvas様のインスタンス作成
-        const ctx = main_canvas.getContext('2d');
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(canvas_img, 0, 0, canvas.width, canvas.height);
-        const DelViewElement = document.getElementById('Result_Table');
-        DelViewElement.remove();
-
-        const CretViewElement = document.getElementById('Result_Section');
-
-        CretViewElement.insertAdjacentHTML('beforeend', "<table id='Result_Table'><tr><th>No.</th><th>X座標</th><th>Y座標</th><th>View</th><th>どんなところが？(任意)</th></tr></table>")
-        counter = 1;
+        Clear_Window();
         alert("選択結果が送信されました！！\nご協力ありがとうございました！！");
 
     }
@@ -321,28 +306,30 @@ finish_btn.addEventListener("click", () => {
 //////////////////////////////////////////////////////////////////////////////
 const clear_btn = document.querySelector("#Clear_btn")
 clear_btn.addEventListener("click", () => {
+    Clear_Window();
 
-    // canvas様のインスタンス作成
-    const ctx = main_canvas.getContext('2d');
-
-
-    ctx.clearRect(0, 0, main_canvas.width, main_canvas.height);
-    ctx.drawImage(canvas_img, 0, 0, main_canvas.width, main_canvas.height);
-    const DelViewElement = document.getElementById('Result_Table');
-    DelViewElement.remove();
-
-    const CretViewElement = document.getElementById('Result_Section');
-
-    CretViewElement.insertAdjacentHTML('beforeend', "<table id='Result_Table'><tr><th>No.</th><th>X座標</th><th>Y座標</th><th>View</th><th>どんなところが？(任意)</th></tr></table>")
-    counter = 1;
 });
 
 
 //////////////////////////////////////////////////////////////////////////////
+// canvasおよびtableの初期化
+//////////////////////////////////////////////////////////////////////////////
+function Clear_Window() {
 
-console.log(data_csv);
+    // canvasの初期化
+    const ctx_clear = main_canvas.getContext('2d');
+    ctx_clear.clearRect(0, 0, main_canvas.width, main_canvas.height);
+    ctx_clear.drawImage(canvas_img, 0, 0, main_canvas.width, main_canvas.height);
 
-// const page_test_id = document.getElementById("page_test");
-// page_test_id.innerText = data_csv ;
+    // tableの初期化
+    const DelViewElement = document.getElementById('Result_Table');
+    DelViewElement.remove();
+    const CretViewElement = document.getElementById('Result_Section');
+    CretViewElement.insertAdjacentHTML('beforeend', "<table id='Result_Table'><tr><th>No.</th><th>X座標</th><th>Y座標</th><th>View</th><th>どんなところが？(任意)</th></tr></table>")
+    counter = 1;
+}
+
+
+//////////////////////////////////////////////////////////////////////////////
 
 // console.log("---------end-----------") ;
