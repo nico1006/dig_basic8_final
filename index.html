@@ -6,18 +6,11 @@
   <title>教えて！あなたのお気に入りポイント</title>
   <meta charset="utf-8" />
   <link rel="stylesheet" href="stylesheet.css">
-  <!-- <script type="text/javascript" src="https://cdn.anychart.com/js/latest/graphics.min.js"></script> -->
-
 
 </head>
 
 
 <body>
-  <!-- <div id="output_client" ></div>
-  <div id="output_screen"></div> -->
-
-  <!-- マウスオーバー要素：<input type="text" id="mouse_elme"> -->
-
   <section id="Top">
     <h1>気に入った箇所をクリックしてください</h1>
     <p>View</p>
@@ -40,7 +33,7 @@
   <section id="Result_Section" class="container">
     <div id="mouse_div">現在のマウス座標</div>
     <div id="canvas_div" class="item">
-      <canvas id="canvas"></canvas>
+      <canvas id="main_canvas"></canvas>
     </div>
 
     <div class="item">
@@ -70,7 +63,7 @@
       </ul>
     </div>
     <div class="item">
-      <ul class="list">他のクルマ
+      <ul class="list">のりもの
         <li><button class="on_list" id="kazmax">kazmax</button></il>
         <li><button class="on_list" id="landcruiser">landcruiser</button></il>
         <li><button class="on_list" id="alphard">alphard</button></il>
@@ -78,9 +71,6 @@
     </div>
   </section>
   <canvas id="top_canvas"></canvas>
-
-  <!-- <button onclick="location.href='nishi_top.html'">top</button> -->
-  <!-- <button id="test_btn">test</button> -->
 
   <script type="text/javascript" src="script.js"></script>
 </body>
