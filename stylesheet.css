@@ -109,6 +109,8 @@ h6 {
 #Download_Section {
     margin-top: 30px;
     position: relative;
+    top: 90px;
+    margin-bottom: 100px;
 }
 #csv_table_id {
     font-size: 0.4em;
