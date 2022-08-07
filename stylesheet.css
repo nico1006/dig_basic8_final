@@ -106,6 +106,21 @@ h6 {
     /* left: 900px; */
 }
 
+#Download_Section {
+    margin-top: 30px;
+    position: relative;
+}
+#csv_table_id {
+    font-size: 0.4em;
+    position: relative;
+    left: 10px;
+    top: 0px;
+    /* background-color:lightskyblue; */
+}
+#csv_table_id td {
+    background-color:lightskyblue;
+}
+
 #mouse_div {
     font-size: 0.4em;
 }
@@ -156,12 +171,12 @@ table th {
 
 }
 
-#download {
+#download_btn {
     background-color: darkgray;
     border-radius: 30px;
     border: 20px;
     border-color: white;
-    color: white;
+    /* color: black; */
     padding: 5px;
     position: absolute;
     top: 450px;
@@ -180,12 +195,14 @@ table th {
     font-size: 2em;
     position: absolute;
     top: 480px;
-    left: 517px;
+    /* left: 517px; */
+    left: 536px;
     cursor: pointer;
 }
 
 hr {
     margin-top: 100px;
+    position: relative;
 }
 
 .list {
