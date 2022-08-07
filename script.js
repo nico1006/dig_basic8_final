@@ -8,6 +8,7 @@ console.log("hello nishimura's script.js!");
 let mouse_target = "";
 let counter = 1;
 let data_csv = "";
+let data_arr = "";
 
 
 
@@ -251,51 +252,61 @@ window.onload = function () {
 //////////////////////////////////////////////////////////////////////////////
 const finish_btn = document.querySelector("#Finish_btn")
 finish_btn.addEventListener("click", () => {
-    let conf = confirm("選択結果を回答しますか？");
+    if (counter != 1) {
+        let conf = confirm("選択結果を回答しますか？");
 
-    if (conf === true) {
+        if (conf === true && counter != 1) {
 
-        const table = document.getElementById("Result_Table");
-        // const cells = Result.querySelectorAll("td") ;
-        // cells.forEach( (cell) => console.log(cell.innerText)) ;
+            const table = document.getElementById("Result_Table");
+            // const cells = Result.querySelectorAll("td") ;
+            // cells.forEach( (cell) => console.log(cell.innerText)) ;
+            data_arr = table;
 
-        // 結果の取得
-        let id_num = 0 ;
-        for (let row of table.rows) {
-            for (let column = 0; column < row.cells.length; column++) {
-                data_csv += row.cells[column].innerText;       // data_csvに格納
-                if (column === row.cells.length - 1) {
-                    data_csv += "\n";
-                } else if (column === row.cells.length-2 && id_num !== 0){
-                    let table_input_id = document.getElementById(`input_reason${id_num}`)
-                    data_csv += "," + table_input_id.value ;
-                } else if(column === row.cells.length-3 && id_num !== 0){
-                    data_csv += `,${img_choice}-`;
-                }else {
-                    data_csv += ",";
+            // 結果の取得
+            let id_num = 0;
+            for (let row of table.rows) {
+                for (let column = 0; column < row.cells.length; column++) {
+                    data_csv += row.cells[column].innerText;       // data_csvに格納
+                    if (column === row.cells.length - 1) {
+                        data_csv += "\n";
+                    } else if (column === row.cells.length - 2 && id_num !== 0) {
+                        let table_input_id = document.getElementById(`input_reason${id_num}`)
+                        data_csv += "," + table_input_id.value;
+                    } else if (column === row.cells.length - 3 && id_num !== 0) {
+                        data_csv += `,${img_choice}-`;
+                    } else {
+                        data_csv += ",";
+                    }
                 }
+                id_num++;
             }
-            id_num++ ;
+            console.log(data_csv);
+
+            Clear_Window();
+            alert("選択結果が送信されました！！\nご協力ありがとうございました！！");
+
+            // downloadボタン、性格診断結果ページボタンを作成
+            const Result_Section_ID = document.getElementById("Result_Section");
+
+            // let download_btn = document.createElement("button");
+            // download_btn.id = "download";
+            // download_btn.innerHTML = "download";
+            // Result_Section_ID.appendChild(download_btn);
+            // download_flag = true;
+            // download_btn_id.color = "white";
+
+            let next_btn = document.createElement("button");
+            next_btn.id = "next";
+            next_btn.innerHTML = "<a href='https://makototanabe.github.io/'>あなたの性格診断結果</a>";
+            Result_Section_ID.appendChild(next_btn);
+
+            Dammy_download();
+            data_csv = [];      // data_csvの初期化
+
+
         }
-        console.log(data_csv);
-        data_csv = [];      // data_csvの初期化
-
-
-        // downloarボタン、性格診断結果ページボタンを作成
-        const Result_Section_ID = document.getElementById("Result_Section");
-
-        // let download_btn = document.createElement("button");
-        // download_btn.id = "download";
-        // download_btn.innerHTML = "download";
-        // Result_Section_ID.appendChild(download_btn);
-
-        let next_btn = document.createElement("button");
-        next_btn.id = "next";
-        next_btn.innerHTML = "<a href='https://makototanabe.github.io/'>あなたの性格診断結果</a>";
-        Result_Section_ID.appendChild(next_btn);
-
-        Clear_Window();
-        alert("選択結果が送信されました！！\nご協力ありがとうございました！！");
+    } else {
+        let conf = confirm("1箇所以上選択ください！");
 
     }
 
@@ -329,6 +340,113 @@ function Clear_Window() {
     counter = 1;
 }
 
+
+//////////////////////////////////////////////////////////////////////////////
+// Dammy_download
+//////////////////////////////////////////////////////////////////////////////
+function Dammy_download() {
+    console.log("test");
+
+    // downloadボタン、性格診断結果ページボタンを作成
+    const Download_Section_ID = document.getElementById("Download_Section");
+
+    console.log(Download_Section_ID) ;
+    console.log(document.getElementById("csv_table_id")) ;
+    if(document.getElementById("csv_table_id") !== null) {
+        document.getElementById("csv_table_id").remove() ;
+    }
+
+    // let download_btn = document.createElement("button");
+    // download_btn.id = "download";
+    // download_btn.innerHTML = "download";
+    // Download_Section_ID.appendChild(download_btn);
+    // download_flag = true;
+    // download_btn.color = "white";
+
+    // console.log(typeof data_csv);
+    // console.log(typeof data_arr) ;
+    // console.log(data_arr) ;
+
+
+    // 文字列を配列に変換
+    const output_data = convert_array(data_csv);
+
+
+    const csv_table_id = document.createElement("table");
+    csv_table_id.id = "csv_table_id"
+
+    output_data.forEach(function (value) {
+        if (value.length !== 1) {
+            const tr = document.createElement("tr");
+            csv_table_id.appendChild(tr);
+            // console.log("value----", value);
+            value.forEach(function (elem) {
+                let td = document.createElement("td");
+                td.innerText = elem;
+                tr.appendChild(td);
+                // console.log("---elem----", value);
+            })
+        }
+    })
+    Download_Section_ID.appendChild(csv_table_id);
+
+
+}
+
+// テキストデータを配列に変換
+function convert_array(csv_data) {
+    let data_array = [];
+    const data_string = csv_data.split('\n');
+    for (let i = 0; i < data_string.length; i++) {
+        data_array[i] = data_string[i].split(',');
+    }
+    // draw_table(data_array);
+    return data_array;
+}
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////
+// download
+//////////////////////////////////////////////////////////////////////////////
+// let download_flag = false;
+// console.log("-----1-----");
+// // if (download_flag === true) {
+// //     console.log("-----2-----");
+
+// //     document.getElementById("download").onclick = function () {
+// //         let conf = confirm("選択結果を回答しますか？");
+// //         confirm("test");
+// //         console.log("test");
+// //     }
+// // }
+// const download_btn_id = document.getElementById("download_btn");
+// // let download_btn_id = document.querySelector("#download")
+// download_btn_id.addEventListener("click", () => {
+//     console.log("-----2-----");
+
+//     // Clear_Window();
+//     console.log(data_csv);
+
+//     var bom = new Uint8Array([0xEF, 0xBB, 0xBF]);//文字コードをBOM付きUTF-8に指定
+//     var blob = new Blob([bom, data_csv], { "type": "text/csv" });//data_csvのデータをcsvとしてダウンロードする関数
+//     if (window.navigator.msSaveBlob) { //IEの場合の処理
+//         window.navigator.msSaveBlob(blob, "test.csv");
+//         //window.navigator.msSaveOrOpenBlob(blob, "test.csv");// msSaveOrOpenBlobの場合はファイルを保存せずに開ける
+//     } else {
+//         // document.getElementById("download").href = window.URL.createObjectURL(blob);
+//         download_btn_id.href = window.URL.createObjectURL(blob);
+//         console.log("test");
+//     }
+
+//     // delete data_csv;//data_csvオブジェクトはもういらないので消去してメモリを開放
+
+//     data_csv = [];
+
+// });
 
 //////////////////////////////////////////////////////////////////////////////
 
