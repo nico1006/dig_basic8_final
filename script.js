@@ -15,9 +15,9 @@ let data_arr = "";
 
 
 //////////////////////////////////////////////////////////////////////////////
-// くにしー.htmlから遷移してきた場合に表示させるcanvas
+// Top画像を表示させるcanvas
 //////////////////////////////////////////////////////////////////////////////
-let top_info = true;        // trueの場合くにしー
+let top_info = false;        // trueの場合Top画像を表示
 // let top_info = false;
 
 if (top_info === true) {
@@ -187,6 +187,32 @@ window.onload = function () {
     document.body.addEventListener("mouseover", function (event) {
         mouse_target = event.target["id"];
         // console.log(mouse_target);
+
+
+
+
+
+        // 
+        if (mouse_target === "front_img") {
+            const popup = document.getElementById("front_pop");
+            // alert(popup.innerText);
+
+            // ボタンにhoverした時
+            // target.addEventListener('mouseover', () => {
+            popup.style.display = 'block';
+            // }, false);
+
+            // // ボタンから離れた時
+            // target.addEventListener('mouseleave', () => {
+            //     popup.style.display = 'none';
+            // }, false);
+
+
+
+
+
+
+        }
     })
 
 
@@ -283,7 +309,7 @@ finish_btn.addEventListener("click", () => {
             console.log(data_csv);
 
             Clear_Window();
-            alert("選択結果が送信されました！！\nご協力ありがとうございました！！");
+            // alert("選択結果が送信されました！！\nご協力ありがとうございました！！");
 
             // downloadボタン、性格診断結果ページボタンを作成
             const Result_Section_ID = document.getElementById("Result_Section");
@@ -297,7 +323,7 @@ finish_btn.addEventListener("click", () => {
 
             let next_btn = document.createElement("button");
             next_btn.id = "next";
-            next_btn.innerHTML = "<a href='https://makototanabe.github.io/'>あなたの性格診断結果</a>";
+            next_btn.innerHTML = "<a href='https://makototanabe.github.io/'>お楽しみへ</a>";
             Result_Section_ID.appendChild(next_btn);
 
             Dammy_download();
@@ -350,10 +376,11 @@ function Dammy_download() {
     // downloadボタン、性格診断結果ページボタンを作成
     const Download_Section_ID = document.getElementById("Download_Section");
 
-    console.log(Download_Section_ID) ;
-    console.log(document.getElementById("csv_table_id")) ;
-    if(document.getElementById("csv_table_id") !== null) {
-        document.getElementById("csv_table_id").remove() ;
+    console.log(Download_Section_ID);
+    console.log(document.getElementById("csv_table_id"));
+    if (document.getElementById("csv_table_id") !== null) {
+        document.getElementById("csv_table_id").remove();
+        document.getElementById("result_title_id").remove();
     }
 
     // let download_btn = document.createElement("button");
@@ -367,11 +394,17 @@ function Dammy_download() {
     // console.log(typeof data_arr) ;
     // console.log(data_arr) ;
 
+    // pタグを作成
+    const result_title_ID = document.createElement("p");
+    result_title_ID.id = "result_title_id";
+    result_title_ID.innerHTML = "入力ありがとうございました！！<br>あなたの入力結果です。";
+    Download_Section_ID.appendChild(result_title_ID);
+
 
     // 文字列を配列に変換
     const output_data = convert_array(data_csv);
 
-
+    // tableを作成
     const csv_table_id = document.createElement("table");
     csv_table_id.id = "csv_table_id"
 
@@ -405,7 +438,21 @@ function convert_array(csv_data) {
 }
 
 
+//////////////////////////////////////////////////////////////////////////////
+// ポップアップの作成
+//////////////////////////////////////////////////////////////////////////////
+// const target = document.getElementById("front_img");
+// const popup = document.getElementById("front_pop");
 
+// // ボタンにhoverした時
+// target.addEventListener('mouseover', () => {
+//     popup.style.display = 'block';
+// }, false);
+
+// // ボタンから離れた時
+// target.addEventListener('mouseleave', () => {
+//     popup.style.display = 'none';
+// }, false);
 
 
 
